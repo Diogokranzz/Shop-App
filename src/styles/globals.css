@@ -1,0 +1,225 @@
+@custom-variant dark (&:is(.dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
+:root {
+  --pixel-black: #000000;
+  --pixel-white: #FFFFFF;
+  --pixel-gray-dark: #333333;
+  --pixel-gray-mid: #808080;
+  --pixel-gray-light: #C0C0C0;
+  --pixel-border: #000000;
+  
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  
+  --font-pixel: 'VT323', 'Courier New', monospace;
+  --font-system: 'Press Start 2P', 'Chicago', monospace;
+
+  --font-size: 16px;
+  --background: var(--pixel-white);
+  --foreground: var(--pixel-black);
+  --card: var(--pixel-white);
+  --card-foreground: var(--pixel-black);
+  --popover: var(--pixel-white);
+  --popover-foreground: var(--pixel-black);
+  --primary: var(--pixel-black);
+  --primary-foreground: var(--pixel-white);
+  --secondary: var(--pixel-gray-light);
+  --secondary-foreground: var(--pixel-black);
+  --muted: var(--pixel-gray-light);
+  --muted-foreground: var(--pixel-gray-dark);
+  --accent: var(--pixel-gray-mid);
+  --accent-foreground: var(--pixel-white);
+  --destructive: var(--pixel-black);
+  --destructive-foreground: var(--pixel-white);
+  --border: var(--pixel-black);
+  --input: var(--pixel-white);
+  --input-background: var(--pixel-white);
+  --ring: var(--pixel-black);
+  --radius: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+body {
+  font-family: var(--font-pixel);
+  background: var(--pixel-gray-mid);
+  color: var(--pixel-black);
+  line-height: 1.5;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  overflow-x: hidden;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      var(--pixel-black) 1px,
+      var(--pixel-black) 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 1px,
+      var(--pixel-black) 1px,
+      var(--pixel-black) 2px
+    );
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes dither-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-2px, 2px); }
+  94% { transform: translate(2px, -2px); }
+  96% { transform: translate(-2px, -2px); }
+  98% { transform: translate(2px, 2px); }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes border-horizontal {
+  0%, 100% { width: 0; }
+  50% { width: 100%; }
+}
+
+@keyframes pixel-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pixel-perfect {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.no-smooth {
+  transition: none !important;
+  animation: none !important;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
+  animation: scanline 8s linear infinite;
+}
+
+.dithered-pattern {
+  background-image: 
+    radial-gradient(circle, var(--pixel-black) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pixel-white);
+  border: 2px solid var(--pixel-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pixel-black);
+  border: 2px solid var(--pixel-white);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-gray-dark);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--pixel-white);
+  border: 2px solid var(--pixel-black);
+}
+
+::selection {
+  background: var(--pixel-black);
+  color: var(--pixel-white);
+}
+
+::-moz-selection {
+  background: var(--pixel-black);
+  color: var(--pixel-white);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size: 12px;
+  }
+}
