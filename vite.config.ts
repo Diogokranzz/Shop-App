@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
+
 export default defineConfig({
-    base: './',
+    base: '/', 
     plugins: [react()],
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -52,7 +53,7 @@ export default defineConfig({
     },
     build: {
         target: 'esnext',
-        outDir: 'build',
+        outDir: 'dist',
     },
     server: {
         port: 3000,
